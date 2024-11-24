@@ -4,9 +4,9 @@
 ### Run as a jar file
 This is an Uber jar. Hence, can be readily imaged for Docker. Execute it through command line: java -jar {name of the jar file with extension}
 ### Complete integration of the Swagger ui.
-which can be accessed at: http://localhost:9090/api
+which can be accessed at: http://localhost:9090/rest-demo/api
 ### H2 Console
-http://localhost:9090/api/h2-console
+http://localhost:9090/rest-demo/api/h2-console
 
 ### H2 JDBC url
 Refer to the property `spring.datasource.url`
