@@ -6,7 +6,9 @@ import com.rest.example.mapper.UserDataMapper;
 import com.rest.example.service.UserService;
 import org.springframework.stereotype.Component;
 
+
 import java.util.List;
+import java.util.Random;
 
 @Component
 public class UserManager {
@@ -21,6 +23,16 @@ public class UserManager {
 
     public List<UserDTO> getAllUsers() {
         List<User> users = userService.getAllUsers();
+        Random rand = new Random();
+
+        // Obtain a number between [0 - 49].
+        int n = rand.nextInt(50);
+        try {
+            Thread.sleep(n * 1000); // sleep 0 - 49s
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         return userDataMapper.mapToUserDTOList(users);
     }
 
