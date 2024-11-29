@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 @Slf4j
@@ -35,6 +36,14 @@ public class UserServiceImpl implements UserService {
             log.error(logMessage);
             throw new UserNotFoundException(logMessage);
         }
+    }
+
+    @Override
+    public long getUid(){
+        Random rand = new Random();
+
+        // Obtain a number between [0 - 49].
+        return rand.nextLong(1000000,999999999);
     }
 
     @Override

@@ -45,4 +45,16 @@ public class UserManager {
         User user = userService.saveUser(userDataMapper.mapToUser(userDTO));
         return userDataMapper.mapToUserDto(user);
     }
+    public long getUid(int delay){
+
+        Random rand = new Random();
+        // Obtain a number between [0 - 49].
+        int n = rand.nextInt(delay);
+        try {
+            Thread.sleep(n * 1000L); // sleep 0 - 49s
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return userService.getUid();
+    }
 }

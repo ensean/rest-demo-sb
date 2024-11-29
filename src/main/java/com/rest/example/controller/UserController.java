@@ -1,5 +1,6 @@
 package com.rest.example.controller;
 
+import com.rest.example.dto.UidDTO;
 import com.rest.example.dto.UserDTO;
 import com.rest.example.manager.UserManager;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,11 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -49,6 +46,20 @@ public class UserController {
         UserDTO user = userManager.getUserById(id);
         log.info("User: {}", user);
         return ResponseEntity.ok(user);
+    }
+
+
+    @Operation(summary = "Get the random uid", description = "Get the random uid")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully Retrieved",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = UserDTO.class))}),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)})
+    @GetMapping("/getUid")
+    public ResponseEntity<UidDTO> getUid(@RequestParam( "delay" ) int delay) {
+        long id = userManager.getUid(delay);
+        UidDTO uid = new UidDTO();
+        uid.setUid(id);
+        return ResponseEntity.ok(uid);
     }
 
     @Operation(summary = "Save the user", description = "Save the user from to database")
